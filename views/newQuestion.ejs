@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add a new question</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main>
+        <h1>Add a new question</h1>
+        <form action="/questions" method="POST" class="question__form">
+            <label for="question">Question:</label>
+            <input type="text" id="question" name="question" required minlength="10" maxlength="255">
+            <label for="category">Category:</label>
+            <select id="category" name="category_id" required>
+                <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>"><%= category.name %></option>
+                <% }); %>
+            </select>
+            <label for="answers">Answers:</label>
+            <div id="answers">
+                <div>
+                    <input type="text" name="answers[0][answer]" required>
+                    <input type="checkbox" name="answers[0][is_correct]"> Correct
+                </div>
+            </div>
+            <button type="button" onclick="addAnswer()">Add another answer</button>
+            <button type="submit">Submit</button>
+        </form>
+        <button onclick="history.back()">Back</button>
+    </main>
+    <script>
+        let answerCount = 1;
+        function addAnswer() {
+            const answersDiv = document.getElementById('answers');
+            const newAnswerDiv = document.createElement('div');
+            newAnswerDiv.innerHTML = `
+                <input type="text" name="answers[${answerCount}][answer]" required>
+                <input type="checkbox" name="answers[${answerCount}][is_correct]"> Correct
+            `;
+            answersDiv.appendChild(newAnswerDiv);
+            answerCount++;
+        }
+    </script>
+    <script src="/script.js"></script>
+</body>
+</html>

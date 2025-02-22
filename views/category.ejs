@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= category.name %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main>
+        <h1><%= category.name %></h1>
+        <ul class="questions">
+            <% questions.forEach((question, index) => { %>
+                <li>
+                    <form class="question__form">
+                        <h2>Spurning <%= index + 1 %></h2>
+                        <p><%= question.question %></p>
+                        <ul>
+                            <% question.answers.forEach(answer => { %>
+                                <li class="answer">
+                                    <label>
+                                        <input type="radio" name="question-<%= question.id %>" value="<%= answer.id %>" data-correct="<%= answer.is_correct %>">
+                                        <%= answer.answer %>
+                                    </label>
+                                </li>
+                            <% }); %>
+                        </ul>
+                        <button type="submit">Submit</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+        <button onclick="history.back()">Back</button>
+    </main>
+    <script src="/script.js"></script>
+</body>
+</html>

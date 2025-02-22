@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main>
+        <h1>Categories</h1>
+        <ul>
+            <% categories.forEach(category => { %>
+                <li><a href="/categories/<%= category.id %>"><%= category.name %></a></li>
+            <% }); %>
+        </ul>
+        <a href="/questions/new">Add a new question</a>
+    </main>
+    <script src="/script.js"></script>
+</body>
+</html>
